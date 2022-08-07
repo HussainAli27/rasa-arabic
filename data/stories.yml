@@ -1,0 +1,47 @@
+version: "3.1"
+
+stories:
+
+- story: activate card path
+  steps:
+  - intent: banking_activate_card
+  - action: utter_banking_activate_card
+  - intent: enter_card_number
+  - action: action_banking_card_activated
+
+- story: banking fee inquiry path
+  steps:
+  - intent: banking_fee_inquiry
+  - action: utter_banking_fee_inquiry
+
+- story: exchange rate path
+  steps:
+  - intent: exchange_rate
+  - action: action_exchange_rate
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
