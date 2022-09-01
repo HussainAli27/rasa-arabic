@@ -36,7 +36,8 @@ pipeline:
      min_ngram: 1
      max_ngram: 4
    - name: rasa_nlu_examples.featurizers.dense.FastTextFeaturizer
-     cache_path: C:/Users/hp/Documents/arabic chatbot/cc.ar.300.bin/cc.ar.300.bin
+     cache_path: /vecs/cc.ar.300.bin
+     # C:/Users/hp/Documents/arabic chatbot/cc.ar.300.bin/cc.ar.300.bin
    - name: DIETClassifier
      epochs: 100
     

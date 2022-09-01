@@ -13,13 +13,13 @@ registry: docker.io/rasa
 
 applicationSettings:
   # -- Enable debug mode
-  debugMode: false
-  initialModel: "https://github.com/HussainAli27/rasa-eng/blob/master/models/20220812-120753-affable-land.tar.gz?raw=true"
+  debugMode: true
+  # -- initialModel: "https://github.com/HussainAli27/rasa-eng/blob/master/models/20220812-120753-affable-land.tar.gz?raw=true"
   # -- Initial model to download and load if a model server or remote storage is not used. It has to be a URL (without auth) that points to a tar.gz file
-  # initialModel: "https://github.com/HussainAli27/rasa-arabic/blob/main/models/20220714-105652-wan-horseradish.tar.gz?raw=true"
+  initialModel: "" # "https://github.com/HussainAli27/rasa-arabic/blob/main/models/20220824-115711-resultant-pass.tar.gz?raw=true"
 
   # -- Train a model if an initial model is not defined. This parameter is ignored if the `applicationSettings.initialModel` is defined
-  trainInitialModel: false
+  trainInitialModel: true
 
   # -- Port on which Rasa runs
   port: 5005
@@ -218,9 +218,9 @@ image:
   name: rasa
 
   # -- Rasa Open Source image tag to use
-  tag: "3.1.0-full"
+  tag: "latest"
   # -- Override default registry + image.name for Rasa Open Source
-  repository: ""
+  repository: "rasa-nlu"
 
   # -- Rasa Open Source image pullPolicy
   pullPolicy: IfNotPresent
@@ -416,7 +416,19 @@ readinessProbe:
 
 # -- Allow to specify init containers for the Rasa Open Source Deployment
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
-initContainers: []
+initContainers: # []
+  - name: download-data
+    image: "bitnami/git:latest"
+    command: ["/bin/sh", "-c"]
+
+# The commands below make sure that the /app directory is empty, and then it clones the rasa-x-demo repository.
+# The rasa image runs with UID 1001, that's why at the end you have to change owner for /app directory.
+    args:
+      - "cd /app && rm -rf {,.[!.],..?}* && git clone https://github.com/HussainAli27/rasa-arabic.git . && chown -R 1001:1001 /app"
+    # Mount the `/app` directory which is shared with the init container that trains a model.
+    volumeMounts:
+      - mountPath: /app
+        name: app-dir
 #  - name: init
 #    image: "busybox"
 #    command: ["bash", "-c"]
