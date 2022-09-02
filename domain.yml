@@ -11,6 +11,7 @@ intents:
   - banking_activate_card
   - banking_fee_inquiry
   - exchange_rate
+  # - connect_live_agent
   - greet
   - goodbye
   - affirm
