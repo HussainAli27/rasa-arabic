@@ -16,7 +16,7 @@ applicationSettings:
   debugMode: true
   # -- initialModel: "https://github.com/HussainAli27/rasa-eng/blob/master/models/20220812-120753-affable-land.tar.gz?raw=true"
   # -- Initial model to download and load if a model server or remote storage is not used. It has to be a URL (without auth) that points to a tar.gz file
-  initialModel: "https://github.com/HussainAli27/rasa-arabic/blob/main/models/20220902-195929-cool-sandwich.tar.gz?raw=true"
+  initialModel: "https://github.com/HussainAli27/rasa-arabic/blob/main/models/20220904-175910-gentle-provolone.tar.gz?raw=true"
 
   # -- Train a model if an initial model is not defined. This parameter is ignored if the `applicationSettings.initialModel` is defined
   trainInitialModel: false

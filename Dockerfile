@@ -8,6 +8,6 @@ RUN . /opt/venv/bin/activate
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir fasttext
 RUN pip install --no-cache-dir git+https://github.com/RasaHQ/rasa-nlu-examples
-# RUN mkdir /vecs
-# ADD C:/Users/hp/Documents/arabic_chatbot/cc.ar.300.bin/cc.ar.300.bin /vecs/cc.ar.300.bin
-# RUN chmod -R a+rxw /vecs
+RUN mkdir /vecs
+ADD vecs/cc.ar.300.bin /vecs/cc.ar.300.bin
+RUN chmod -R a+rxw /vecs
