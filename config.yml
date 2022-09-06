@@ -36,7 +36,7 @@ pipeline:
      min_ngram: 1
      max_ngram: 4
    - name: rasa_nlu_examples.featurizers.dense.FastTextFeaturizer
-     cache_path: vecs/cc.ar.300.bin
+     cache_path: ../vecs/cc.ar.300.bin
      # /vecs/cc.ar.300.bin
    - name: DIETClassifier
      epochs: 100
