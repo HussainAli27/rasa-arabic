@@ -9,14 +9,14 @@ fullnameOverride: ""
 
 # -- Registry to use for all Rasa images (default docker.io)
 ## DockerHub - use docker.io/rasa
-registry: docker.io/rasa
+registry: docker.io
 
 applicationSettings:
   # -- Enable debug mode
   debugMode: true
   # -- initialModel: "https://github.com/HussainAli27/rasa-eng/blob/master/models/20220812-120753-affable-land.tar.gz?raw=true"
   # -- Initial model to download and load if a model server or remote storage is not used. It has to be a URL (without auth) that points to a tar.gz file
-  initialModel: "https://github.com/HussainAli27/rasa-arabic/blob/main/models/20220904-175910-gentle-provolone.tar.gz?raw=true"
+  initialModel: "https://github.com/HussainAli27/rasa-arabic/blob/main/models/20220906-135400-cerulean-lien.tar.gz?raw=true"
 
   # -- Train a model if an initial model is not defined. This parameter is ignored if the `applicationSettings.initialModel` is defined
   trainInitialModel: false
@@ -87,7 +87,7 @@ applicationSettings:
     ## All environment variables used as values are added to the rasa-oss container automatically if `postgresql.install=true`.
     trackerStore:
       # -- Enable endpoint for Tracker Store
-      enabled: true
+      enabled: false
 
       # -- Tracker Store type
       type: sql
@@ -215,12 +215,12 @@ extraEnv: []
 ## Define the rasa image to work with
 image:
   # -- Rasa Open Source image name to use (relative to `registry`)
-  name: rasa
+  name: hussain27ha/rasa-nlu
 
   # -- Rasa Open Source image tag to use
   tag: "latest"
   # -- Override default registry + image.name for Rasa Open Source
-  repository: "rasa-nlu"
+  repository: "hussain27ha/rasa-nlu"
 
   # -- Rasa Open Source image pullPolicy
   pullPolicy: IfNotPresent
@@ -394,9 +394,9 @@ livenessProbe:
     port: http
     scheme: HTTP
   initialDelaySeconds: 15
-  periodSeconds: 15
+  periodSeconds: 400
   successThreshold: 1
-  timeoutSeconds: 5
+  timeoutSeconds: 400
   failureThreshold: 6
 
 # -- Override default readiness probe settings
@@ -409,9 +409,9 @@ readinessProbe:
     port: http
     scheme: HTTP
   initialDelaySeconds: 15
-  periodSeconds: 15
+  periodSeconds: 400
   successThreshold: 1
-  timeoutSeconds: 5
+  timeoutSeconds: 400
   failureThreshold: 6
 
 # -- Allow to specify init containers for the Rasa Open Source Deployment
@@ -483,8 +483,10 @@ global:
 
 ## PostgreSQL specific settings (https://hub.helm.sh/charts/bitnami/postgresql/10.3.18)
 postgresql:
+  volumePermissions:
+    enabled: true
   # -- Install PostgreSQL
-  install: true
+  install: false
   # automountServiceAccountToken: false
 
   ## Use external PostgreSQL installation
@@ -575,10 +577,10 @@ nginx:
       path: /
       port: http-nginx
       scheme: HTTP
-    initialDelaySeconds: 15
-    periodSeconds: 15
+    initialDelaySeconds: 300
+    periodSeconds: 300
     successThreshold: 1
-    timeoutSeconds: 5
+    timeoutSeconds: 300
     failureThreshold: 6
 
   # -- Override default readiness probe settings
@@ -589,10 +591,10 @@ nginx:
       path: /
       port: http-nginx
       scheme: HTTP
-    initialDelaySeconds: 15
-    periodSeconds: 15
+    initialDelaySeconds: 300
+    periodSeconds: 300
     successThreshold: 1
-    timeoutSeconds: 5
+    timeoutSeconds: 300
     failureThreshold: 6
 
   # -- Port number that Nginx listen on
